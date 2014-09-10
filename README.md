@@ -13,6 +13,6 @@ Simple Windows Service to monitor and kill hanging processes.
 
 See `Terminator.exe.config` in the output folder.
 
-- `ProcessNames` – a list of processes to watch, separated by semicolon, file names without extension, for example `"java;notepad"`
+- `ProcessNames` – a list of Command Line parts of processes to watch, separated by semicolon, file names without extension, for example `"MSSQL\Binn\sqlserver.exe&quot; -sSQL2012;MSSQL\Binn\sqlserver.exe&quot; -sSQLEXPRESS"`
 - `CheckTimerInterval` – how often the service timer runs, in milliseconds
 - `KillAfter` – how long can the process run before being killed, in milliseconds
