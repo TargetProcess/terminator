@@ -14,8 +14,8 @@ namespace Terminator
 {
 	public partial class TerminatorService : ServiceBase
 	{
-		private const double DefaultTimeToKillMs = 20*60*1000;
-		private const double DefaultTimerResolutionMs = 60*1000;
+		private const double DefaultTimeToKillMs = 20*60;
+		private const double DefaultTimerResolutionMs = 60;
 
 		private readonly ReadOnlyCollection<string> _processesToWatch;
 		private readonly TimeSpan _timeToKill;
@@ -30,10 +30,10 @@ namespace Terminator
 
 			var settings = ConfigurationManager.AppSettings;
 
-			_timeToKill = TimeSpan.FromMilliseconds(settings.ParseDouble("KillAfter") ?? DefaultTimeToKillMs);
+			_timeToKill = TimeSpan.FromSeconds(settings.ParseDouble("KillAfter") ?? DefaultTimeToKillMs);
 			_processesToWatch = new ReadOnlyCollection<string>(settings.ParseValues("ProcessNames", ';'));
 
-			_timer = new Timer {Interval = settings.ParseDouble("CheckTimerInterval") ?? DefaultTimerResolutionMs};
+			_timer = new Timer {Interval = (settings.ParseDouble("CheckTimerInterval") ?? DefaultTimerResolutionMs) * 1000};
 			_timer.Elapsed += OnTimerTick;
 		}
 
